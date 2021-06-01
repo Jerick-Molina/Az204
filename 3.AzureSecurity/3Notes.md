@@ -220,6 +220,22 @@ Type of **App Configuration Roles** you can give with Azure AD/ Managed Identiti
 <~ Test Tips !
 </h3>
 
+
+Microsoft specifically calls out the following for working Azure Key Vault:
+- Secure app configuration data by using the App configuration and keyvault API
+
+- Manage keys,secrets, and certificates by using the KeyVault API
+
+It expects you to know how to integrate your applications with AKV and use the Rest API associated with it, rather than a just a general knowledge of the service.
+
+**The key api will be focusing on**:
+- Azure CLI
+- PowerShell
+- REST API
+- Resource manager
+- .Net
+
+
 <!--------------Sub-SUBJECT------------------->
 <h3 style="text-align: Right;font-weight: bold;color:lightgreen;" >
 <~ Notes |
@@ -249,3 +265,113 @@ Azure Key Vault is the place where you can hide keys and sure only the people an
 <h4 style="text-align:center;font-weight: bold;color:Pink;" >
 |<--AZURE KEY Certificates-->|
 </h4>
+
+**Key vault certifcates** support provides management for your x506 certificates
+and allows the 5 Behaviors:
+
+1. It allows a certificate owner create a certificate through a Key vault Creating process or through the import of an existing certificate. Includes both self-signed and Cerificate Authority generated certificates
+
+2. Allows a Key vault certificate owner to implement secure storage and management of X509 certificates without interaction with private key material.
+
+3. Alows a acertificate owner to create a policy that directs Key Vault to mange the life-cylcle of a certificate.
+
+4. Allows certificate owners to provide contact information for notification about life-cylce events of expiration and renewal of certificates
+
+5. Supports automatic renewal with selected issuers - KEy Vault partner x509 certificate providers/ certificate authorities.
+
+
+<!-----------------------------------SUBJECT------------------------------------------->
+<h2 style="text-align: left;font-weight: bold;color:orange;text-decoration:underline" >
+| Managed IDs' |
+</h2> 
+<!--------------Sub-SUBJECT------------------->
+<h3 style="text-align: Right;font-weight: bold;color:lightgreen;" >
+<~ Test Tips !
+</h3>
+
+<!--------------Sub-SUBJECT------------------->
+<h3 style="text-align: Right;font-weight: bold;color:lightgreen;" >
+<~ Notes !
+</h3>
+
+
+
+&emsp;
+ <!----Sub-Sub-SUBJECT---->
+<h4 style="text-align:center;font-weight: bold;color:Pink;" >
+|<--MANANGED IDENTITIES-->|
+</h4>
+
+<!---Sub--Sub-Sub-SUBJECT--->
+<h4 style="font-style:italic;font-weight: bold;color:lightblue;" >
+| What is Managed Identity~>
+</h4>
+
+**Managed Identities** eliminate the need for developer to manage credintials. You can use Managed identeties to authenticate to any resource that supports **Azure Active Directory authentication**
+
+&emsp;
+ <!----Sub-Sub-SUBJECT---->
+<h4 style="text-align:center;font-weight: bold;color:Pink;" >
+|<--two identities-->|
+</h4>
+
+<!---Sub--Sub-Sub-SUBJECT--->
+<h4 style="font-style:italic;font-weight: bold;color:lightblue;" >
+| System-Assigned Identity~>
+</h4>
+
+Identity that is part of the configuration store. If you remove the configuration store, this identity goes with it. There can only be one system-assigned identity
+
+With SAMI youre able to:
+- Enable or disable manged identities at the resource level.
+- Use RBAC roles to grant permissions
+- View create, read, update, delete (CRUD) operations in Azure Activity logs.
+- View sign-in activity in Azure AD sign-in logs.
+
+<!---Sub--Sub-Sub-SUBJECT--->
+<h4 style="font-style:italic;font-weight: bold;color:lightblue;" >
+| User-Assigned Identity~>
+</h4>
+
+Standalone resource that can be assigned to the configuraiton store(such as user or group). OCnfiguration stores can have multiple user-assigned identities
+
+With UAMI youre able to:
+
+- Create,read,update, delete the identities
+- You can user RBAC role assignments to grand permissions.
+- User assigned managed identites can be used on more than one resource.
+- CRUD operations are availble for review in Azure Activity Logs.
+- View sign-in activit in Azure AD sign-in logs.
+
+<!---Sub--Sub-Sub-SUBJECT--->
+<h4 style="font-style:italic;font-weight: bold;color:lightblue;" >
+| Compare and contrast~>
+</h4>
+
+|Property   | SAMI | UAMI  |
+|:- |:- | :-|
+| **Creation**  | Created as a part of Azure resource(ex: Azure VM or Azure AS)  |  Created as a stand alone Azure resource |
+| **Life cycle** | Shared life cycle with the Azure resource that managed identity is created with. When the resource is deleted, the managed identity is deleted as well. | independent life cycle . Must be explicitly deleted.
+|  **Sharing across Azure resources**  |  Cannot be Shared. It can only be associated with a single Azure resource |  Can be shared. The same user0assigned managed identity can eb associated with more than one Azure resource  |    
+|  **Common use cases** |  Workloads that are contained within a single Azure resource, Workloads for which you need independent identities. For example, an application that runs on a single virtual machine | Workloads that run on multiple resources and which can share single identity. workloads that need pre-authorization to secure resource as part of a provisioning flow. Workloads where resources are recycled frequently but permissions should stay consistent. For ex: a worload where multiple virtual machines need to access the same resource.  |
+
+<!---Sub--Sub-Sub-SUBJECT--->
+<h4 style="font-style:italic;font-weight: bold;color:lightblue;" >
+| How could i use this? or why?~>
+</h4>
+
+As a developer, I want to build an application using: Azure ->
+-  Resources
+-  Vms
+-  App Services
+- Functions
+- Container instances
+- Kubernetes Service
+- Logic Apps
+- Azure Storage
+
+that accessess **Any target that supports Azure Active Directory Authentications**
+- Azure Key Vault
+- Azure Storage
+- Azure SQL
+- Your applications
